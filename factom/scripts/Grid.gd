@@ -1,19 +1,34 @@
 extends Node2D
 
 export var cell = 64
-export var bar_ratio = 0.125
 export var bg_color = Color("2f3e5c")
 export var line_color = Color("3d4f73")
 
+var last_transform = Transform2D()
+
+func _ready():
+	VisualServer.set_default_clear_color(bg_color)
+
+func _process(_delta):
+	var t = get_canvas_transform()
+	if t != last_transform:
+		last_transform = t
+		update()
+
 func _draw():
-	var size = get_viewport_rect().size
-	var play_h = size.y * (1.0 - bar_ratio)
-	draw_rect(Rect2(0, 0, size.x, play_h), bg_color)
-	var x = 0
-	while x <= size.x:
-		draw_line(Vector2(x, 0), Vector2(x, play_h), line_color, 1)
+	var ct = get_canvas_transform()
+	var inv = ct.affine_inverse()
+	# Converte os cantos da tela para coordenadas do mundo
+	var top_left = inv.xform(Vector2.ZERO)
+	var bottom_right = inv.xform(get_viewport_rect().size)
+	var rect = Rect2(top_left, bottom_right - top_left)
+
+	var w = 1.0 / ct.get_scale().x   # mantém a linha com 1 px na tela em qualquer zoom
+	var x = floor(rect.position.x / cell) * cell
+	while x <= rect.end.x:
+		draw_line(Vector2(x, rect.position.y), Vector2(x, rect.end.y), line_color, w)
 		x += cell
-	var y = 0
-	while y <= play_h:
-		draw_line(Vector2(0, y), Vector2(size.x, y), line_color, 1)
+	var y = floor(rect.position.y / cell) * cell
+	while y <= rect.end.y:
+		draw_line(Vector2(rect.position.x, y), Vector2(rect.end.x, y), line_color, w)
 		y += cell

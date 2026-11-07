@@ -1,46 +1,34 @@
 extends Node2D
 
-const COLORS = {
-	"triangle": Color("4cd964"),
-	"square": Color("ff9500"),
-	"hexagon": Color("ff6fb5"),
-	"star": Color("ffe033"),
+const FOLDER = "res://sprites/"
+const NAMES = {
+	"triangle": "triangulo",
+	"square": "quadrado",
+	"hexagon": "hexagono",
+	"star": "estrela",
 }
 
+var dist = 0.0   # distância já percorrida na esteira
 var shape = "triangle"
 var refined = false
 
+onready var sprite = $Sprite
+
+func _ready():
+	_update_texture()
+
 func setup(new_shape):
 	shape = new_shape
-	update()
+	if is_inside_tree():
+		_update_texture()
 
 func refine():
 	refined = true
-	update()
+	_update_texture()
 
-func _draw():
-	var col = Color.white if refined else COLORS[shape]
-	match shape:
-		"triangle":
-			draw_colored_polygon(_poly(3, 12, -PI / 2), col)
-		"square":
-			draw_rect(Rect2(-10, -10, 20, 20), col)
-		"hexagon":
-			draw_colored_polygon(_poly(6, 12, 0), col)
-		"star":
-			draw_colored_polygon(_star(5, 13, 5.5), col)
-
-func _poly(sides, r, rot):
-	var pts = PoolVector2Array()
-	for i in range(sides):
-		var a = rot + TAU * i / sides
-		pts.append(Vector2(cos(a), sin(a)) * r)
-	return pts
-
-func _star(points, r_out, r_in):
-	var pts = PoolVector2Array()
-	for i in range(points * 2):
-		var a = -PI / 2 + PI * i / points
-		var r = r_out if i % 2 == 0 else r_in
-		pts.append(Vector2(cos(a), sin(a)) * r)
-	return pts
+func _update_texture():
+	var base = FOLDER + NAMES[shape]
+	var path = (base + "_branco.png") if refined else (base + ".png")
+	if not ResourceLoader.exists(path):
+		path = base + ".png"
+	sprite.texture = load(path)
