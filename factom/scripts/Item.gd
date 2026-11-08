@@ -1,11 +1,12 @@
 extends Node2D
 
-const FOLDER = "res://sprites/"
 const NAMES = {
 	"triangle": "triangulo",
 	"square": "quadrado",
-	"hexagon": "hexagono",
+	"hexagon": "octogono",
 	"star": "estrela",
+	"circle": "circulo",
+	"diamond": "losangulo",
 }
 
 var dist = 0.0   # distância já percorrida na esteira
@@ -27,8 +28,8 @@ func refine():
 	_update_texture()
 
 func _update_texture():
-	var base = FOLDER + NAMES[shape]
-	var path = (base + "_branco.png") if refined else (base + ".png")
-	if not ResourceLoader.exists(path):
-		path = base + ".png"
-	sprite.texture = load(path)
+	var nome = NAMES[shape]
+	if refined:
+		nome += "_branco"
+	Sprites.apply(sprite, nome)
+	sprite.scale = Vector2.ONE * Sprites.PIXEL_SCALE

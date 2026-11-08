@@ -1,6 +1,6 @@
 extends Node2D
 
-export var cell = 64
+export var cell = 60
 export var bg_color = Color("2f3e5c")
 export var line_color = Color("3d4f73")
 

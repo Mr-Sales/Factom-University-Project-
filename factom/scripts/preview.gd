@@ -1,6 +1,6 @@
 extends Node2D
 
-const CELL = 64
+const CELL = 60
 
 var paths = []
 var valid = true

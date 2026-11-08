@@ -5,7 +5,7 @@ const BeltScene = preload("res://scenes/Belt.tscn")
 const MachineScript = preload("res://scripts/Machine.gd")
 const Pathfinder = preload("res://scripts/pathfinder.gd")
 
-const CELL = 64
+const CELL = 60
 const BAR_HEIGHT = 80
 const NO_CELL = Vector2(99999, 99999)
 
@@ -41,7 +41,7 @@ func _ready():
 	add_to_group("main")
 	spawner = _place_machine(SPAWNER, Vector2(5, 5))
 	var refinery = _place_machine(REFINERY, Vector2(10, 5), "triangle")
-	seller = _place_machine(SELLER, Vector2(15, 5))
+	seller = _place_machine(SELLER, Vector2(15, 5), "triangle", true)
 	_build_belt(spawner, refinery, Pathfinder.find_path(spawner.cell, refinery.cell, occupied), "triangle")
 	_build_belt(refinery, seller, Pathfinder.find_path(refinery.cell, seller.cell, occupied), "triangle")
 
@@ -52,15 +52,16 @@ func _ready():
 func _icons():
 	var icons = {}
 	for s in BUY_ORDER:
-		icons[s] = MachineScript.TEXTURES[MachineScript.SHAPE_TO_COLOR[s]]
+		icons[s] = Sprites.get_texture(MachineScript.SHAPE_NAMES[s])
 	return icons
 
 # ---------- construção ----------
 
-func _place_machine(kind, cell, shape = "triangle"):
+func _place_machine(kind, cell, shape = "triangle", accepting = false):
 	var m = MachineScene.instance()
 	m.kind = kind
 	m.accepted_shape = shape
+	m.is_accepting = accepting
 	m.cell = cell
 	m.position = cell * CELL
 	machines.add_child(m)

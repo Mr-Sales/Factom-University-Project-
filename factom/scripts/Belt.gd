@@ -1,8 +1,11 @@
 extends Node2D
 
-const CELL = 64
-const STRAIGHT = preload("res://sprites/esteira.png")
-const CURVE = preload("res://sprites/esteira_curva.png")
+const CELL = 60
+
+# O sprite da curva no spritesheet liga ESQUERDA e BAIXO.
+# A lógica original assumia ESQUERDA e CIMA, então somamos 90 graus.
+# Se as curvas ficarem erradas no jogo, troque para 0.0
+const CURVE_OFFSET = PI / 2
 
 export var speed = 120.0
 
@@ -28,15 +31,15 @@ func _build_tiles(cells):
 		var s = Sprite.new()
 		s.position = c * CELL
 		if d_in == d_out:
-			s.texture = STRAIGHT
+			Sprites.apply(s, "esteira")
 			s.rotation = d_out.angle()   # sprite base aponta para a direita
 		else:
-			s.texture = CURVE
-			s.rotation = _curve_rotation(d_in, d_out)
-		s.scale = Vector2.ONE * (CELL / float(s.texture.get_width()))
+			Sprites.apply(s, "esteira_curva")
+			s.rotation = _curve_rotation(d_in, d_out) + CURVE_OFFSET
+		s.scale = Vector2.ONE * (CELL / s.region_rect.size.x)
 		add_child(s)
 
-# Sprite base da curva: conecta o lado ESQUERDO e o lado de CIMA
+# Rotação para um sprite base que conecta o lado ESQUERDO e o lado de CIMA
 func _curve_rotation(d_in, d_out):
 	var sides = [-d_in, d_out]   # lado por onde entra e lado por onde sai
 	if sides.has(Vector2.LEFT) and sides.has(Vector2.UP):

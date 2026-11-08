@@ -3,28 +3,25 @@ extends Node2D
 enum Kind { SPAWNER, REFINERY, SELLER }
 
 const ItemScene = preload("res://scenes/Item.tscn")
-const SHAPES = ["triangle", "square", "hexagon", "star"]
+const SHAPES = ["triangle", "square", "hexagon", "star", "circle", "diamond"]
 
-const TEXTURES = {
-	"branco": preload("res://sprites/circulo_branco.png"),
-	"preto": preload("res://sprites/circulo_preto.png"),
-	"verde": preload("res://sprites/circulo_verde.png"),
-	"laranja": preload("res://sprites/circulo_laranja.png"),
-	"rosa": preload("res://sprites/circulo_rosa.png"),
-	"amarelo": preload("res://sprites/circulo_amarelo.png"),
+const SHAPE_NAMES = {
+	"circle": "circulo",
+	"triangle": "triangulo",
+	"square": "quadrado",
+	"hexagon": "octogono",
+	"star": "estrela",
+	"diamond": "losangulo",
 }
 
-const SHAPE_TO_COLOR = {
-	"triangle": "verde",
-	"square": "laranja",
-	"hexagon": "rosa",
-	"star": "amarelo",
-}
+# fração do tamanho da máquina que o ícone ocupa
+const ICON_RATIO = 0.4
 
 export(Kind) var kind = Kind.SPAWNER
 export var display_size = 64.0
 export var spawn_interval = 1.0
 export var accepted_shape = "triangle"
+export var is_accepting = false   # marque no Inspetor para estados finais
 
 var cell = Vector2.ZERO     # posição na grade (definida pelo Main)
 var outputs = {}            # forma -> esteira de saída
@@ -34,17 +31,23 @@ var spawn_index = 0
 onready var sprite = $Sprite
 
 func _ready():
-	sprite.texture = TEXTURES[_texture_key()]
-	sprite.scale = Vector2.ONE * (display_size / sprite.texture.get_width())
+	Sprites.apply(sprite, _sprite_name())
+	sprite.scale = Vector2.ONE * Sprites.PIXEL_SCALE
+	if kind == Kind.REFINERY:
+		_add_shape_icon()
 
-func _texture_key():
-	match kind:
-		Kind.SPAWNER:
-			return "branco"
-		Kind.SELLER:
-			return "preto"
-		_:
-			return SHAPE_TO_COLOR[accepted_shape]
+func _sprite_name():
+	if is_accepting:
+		return "estado_aceitacao"
+	return "estado_padrao"
+
+func _add_shape_icon():
+	if not SHAPE_NAMES.has(accepted_shape):
+		return
+	var icon = Sprite.new()
+	add_child(icon)
+	Sprites.apply(icon, SHAPE_NAMES[accepted_shape])
+	icon.scale = Vector2.ONE * (display_size * ICON_RATIO / icon.region_rect.size.x)
 
 func add_output(shape, belt):
 	outputs[shape] = belt
