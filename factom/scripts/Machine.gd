@@ -15,7 +15,7 @@ const SHAPE_NAMES = {
 }
 
 # fração do tamanho da máquina que o ícone ocupa
-const ICON_RATIO = 0.4
+const ICON_RATIO = 0.6
 
 export(Kind) var kind = Kind.SPAWNER
 export var display_size = 64.0
