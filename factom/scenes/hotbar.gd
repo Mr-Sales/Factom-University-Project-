@@ -7,6 +7,13 @@ var slots = {}
 
 func setup(order, new_prices, icons):
 	prices = new_prices
+
+	var font = DynamicFont.new()
+	font.font_data = preload("res://random bullshit/Monocraft.otf")
+	font.size = 24
+	font.use_filter = false
+	font.use_mipmaps = false
+	
 	var box = HBoxContainer.new()
 	box.alignment = BoxContainer.ALIGN_CENTER
 	box.add_constant_override("separation", 16)
@@ -31,6 +38,7 @@ func setup(order, new_prices, icons):
 		var lbl = Label.new()
 		lbl.name = "Price"
 		lbl.text = "$" + str(prices[shape])
+		lbl.add_font_override("font", font)
 		lbl.rect_position = Vector2(64, 22)
 		lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		b.add_child(lbl)

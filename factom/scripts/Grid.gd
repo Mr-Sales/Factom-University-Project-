@@ -1,8 +1,8 @@
 extends Node2D
 
 export var cell = 60
-export var bg_color = Color("2f3e5c")
-export var line_color = Color("3d4f73")
+export var bg_color = Color("#444c84")
+export var line_color = Color("#5c79a6")
 
 var last_transform = Transform2D()
 
