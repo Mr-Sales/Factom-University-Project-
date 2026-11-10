@@ -7,9 +7,15 @@ const TILE_OBJETOS  = 20
 const PIXEL_SCALE   =  3
 
 const ESTADOS = {
-	"estado_padrao":    Vector2(0, 0),
-	"estado_aceitacao": Vector2(1, 0),
+	"estado_triangulo": Vector2(0, 0),   # rosa
+	"estado_quadrado":  Vector2(1, 0),   # cinza
+	"estado_estrela":   Vector2(2, 0),   # laranja
+	"estado_fim":       Vector2(3, 1),   # ciano (provisório; o definitivo vai para (3, 0))
+	"estado_losango":   Vector2(1, 1),   # verde
+	"estado_octogono":  Vector2(2, 1),   # vermelho
+	"estado_inicio":    Vector2(3, 0),   # verde escuro com anel (a cor vai mudar)
 }
+
 
 const OBJETOS = {
 	"circulo":          Vector2(0, 0),

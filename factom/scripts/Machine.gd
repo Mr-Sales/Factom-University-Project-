@@ -21,7 +21,6 @@ export(Kind) var kind = Kind.SPAWNER
 export var display_size = 64.0
 export var spawn_interval = 1.0
 export var accepted_shape = "triangle"
-export var is_accepting = false   # marque no Inspetor para estados finais
 
 var cell = Vector2.ZERO     # posição na grade (definida pelo Main)
 var outputs = {}            # forma -> esteira de saída
@@ -30,16 +29,24 @@ var spawn_index = 0
 
 onready var sprite = $Sprite
 
+# Se a cor da máquina já bastar para identificar a forma, coloque false
+const SHOW_SHAPE_ICON = true
+
 func _ready():
 	Sprites.apply(sprite, _sprite_name())
 	sprite.scale = Vector2.ONE * Sprites.PIXEL_SCALE
-	if kind == Kind.REFINERY:
+	if kind == Kind.REFINERY and SHOW_SHAPE_ICON:
 		_add_shape_icon()
 
 func _sprite_name():
-	if is_accepting:
-		return "estado_aceitacao"
-	return "estado_padrao"
+	match kind:
+		Kind.SPAWNER:
+			return "estado_inicio"
+		Kind.SELLER:
+			return "estado_fim"
+		_:
+			# refinarias: o estado segue o nome da forma (estado_triangulo, estado_quadrado...)
+			return "estado_" + SHAPE_NAMES[accepted_shape]
 
 func _add_shape_icon():
 	if not SHAPE_NAMES.has(accepted_shape):

@@ -19,7 +19,7 @@ const VALUES = {"triangle": 1, "square": 3, "hexagon": 5, "star": 10}
 const BUY_ORDER = ["square", "hexagon", "star"]
 const PRICES = {"square": 15, "hexagon": 40, "star": 100}
 
-var money = 0
+var money = 50
 var occupied = {}          # células ocupadas por máquinas e esteiras
 var owned = {}             # formas cuja máquina já foi comprada
 var spawner = null
@@ -41,7 +41,7 @@ func _ready():
 	add_to_group("main")
 	spawner = _place_machine(SPAWNER, Vector2(5, 5))
 	var refinery = _place_machine(REFINERY, Vector2(10, 5), "triangle")
-	seller = _place_machine(SELLER, Vector2(15, 5), "triangle", true)
+	seller = _place_machine(SELLER, Vector2(15, 5))
 	_build_belt(spawner, refinery, Pathfinder.find_path(spawner.cell, refinery.cell, occupied), "triangle")
 	_build_belt(refinery, seller, Pathfinder.find_path(refinery.cell, seller.cell, occupied), "triangle")
 
@@ -57,11 +57,10 @@ func _icons():
 
 # ---------- construção ----------
 
-func _place_machine(kind, cell, shape = "triangle", accepting = false):
+func _place_machine(kind, cell, shape = "triangle"):
 	var m = MachineScene.instance()
 	m.kind = kind
 	m.accepted_shape = shape
-	m.is_accepting = accepting
 	m.cell = cell
 	m.position = cell * CELL
 	machines.add_child(m)
