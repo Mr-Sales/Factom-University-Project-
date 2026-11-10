@@ -30,8 +30,6 @@ Eu pensei nisso pra deixar mais parecido com os AFN que o professor mostra nas a
 **-ALTERAÇÕES NA MÁQUINA "INÍCIO"**
 Eu pensei em nisso pra permitir mais cadeias possíveis, agora dá pra botar uma maquina "inicio" em uma esteira que já tem uma maquina que refina os minérios, oq ela faz de diferente é q quando um minério diferente passa pro ela, a máquina manda um minério não refinado aleatorio desbloqueado junto, isso permite cadeias tipo "todas as cadeias que começam com quadrado", por exemplo.
 
-#**-BÔNUS POR CHEGAR AO FIM**
-Cadeias que chegam no fim ganham o valor das formas dobrado ( isso foi pra dar mais recompensas pra quem fizer uma cadeia certa, vai estimular a criatividade creio eu
 #**-UPGRADE NA MÁQUINA "FIM"**
 Agora, pode-se melhor a máquina fim, que consta com um multiplicador de dinheiro, fazendo com que as cadeias que chegam no fim ganham o valor das formas dobrado/triplicado/quadruplicado ( isso foi pra dar mais recompensas pra quem fizer uma cadeia certa, vai estimular a criatividade creio eu)
 
@@ -41,3 +39,4 @@ Pra não precisar depender do scrool do mouse dnv, agora o menu de upgrades tem 
 
 # Factom-University-Project-
 A game developed collaboratively using Godot to improve understanding of automata
+
