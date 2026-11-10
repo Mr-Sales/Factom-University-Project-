@@ -1,10 +1,10 @@
-# CHANGELOG (10/11/2026)
+# CHANGELOG RAFAEL(10/11/2026)
 
 **-TEMOS UM MENU**
-tá simples e básico, mas fiz o mais bonitinho possível usando os sprites de Luca agora q deu pra mexer direito, adicionei um botão de voltar pro menu também quando estiver em jogo.
+Tá simples e básico, mas fiz o mais bonitinho possível usando os sprites de Luca agora q deu pra mexer direito, adicionei um botão de voltar pro menu também quando estiver em jogo.
 
 **-ZOOM OUT E ZOOM IN**
-agora luca não dependera de seu touchpad para dar zoom in e zoom out, os botões "i" e "o" fazem respectivamente essas funções. (já dá pra fazer um porte pra console)
+Agora luca não dependera de seu touchpad para dar zoom in e zoom out, os botões "i" e "o" fazem respectivamente essas funções. (já dá pra fazer um porte pra console)
 
 
 **-CADA MINÉRIO TEM VALOR DIFERENTE CRU ( é importante para próxima mecânica)**
@@ -27,6 +27,14 @@ Eu pensei nisso pra deixar mais parecido com os AFN que o professor mostra nas a
 (ela também faz um efeitinho de aceitação e rejeição.)
 
 
+**-ALTERAÇÕES NA MÁQUINA "INÍCIO"**
+Eu pensei em nisso pra permitir mais cadeias possíveis, agora dá pra botar uma maquina "inicio" em uma esteira que já tem uma maquina que refina os minérios, oq ela faz de diferente é q quando um minério diferente passa pro ela, a máquina manda um minério não refinado aleatorio desbloqueado junto, isso permite cadeias tipo "todas as cadeias que começam com quadrado", por exemplo.
+
+#**-BÔNUS POR CHEGAR AO FIM**
+Cadeias que chegam no fim ganham o valor das formas dobrado ( isso foi pra dar mais recompensas pra quem fizer uma cadeia certa, vai estimular a criatividade creio eu
+
+#**-Barrinha pra drag (corrimão)**
+Pra não precisar depender do scrool do mouse dnv, agora o menu de upgrades tem uma barrinha de puxar
 
 
 # Factom-University-Project-
