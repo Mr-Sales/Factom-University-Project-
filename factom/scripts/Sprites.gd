@@ -10,8 +10,9 @@ const ESTADOS = {
 	"estado_triangulo": Vector2(0, 0),   # rosa
 	"estado_quadrado":  Vector2(1, 0),   # cinza
 	"estado_estrela":   Vector2(2, 0),   # laranja
-	"estado_fim":       Vector2(3, 1),   # ciano (provisório; o definitivo vai para (3, 0))
-	"estado_losango":   Vector2(1, 1),   # verde
+	"estado_fim":       Vector2(3, 2),   # círculo escuro com "FIM"
+	"estado_circulo":   Vector2(0, 1),   # ciano
+	"estado_losangulo": Vector2(1, 1),   # verde (o nome segue SHAPE_NAMES do Machine.gd)
 	"estado_octogono":  Vector2(2, 1),   # vermelho
 	"estado_inicio":    Vector2(3, 0),   # verde escuro com anel (a cor vai mudar)
 }
