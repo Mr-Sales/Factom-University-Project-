@@ -27,6 +27,12 @@ func refine():
 	refined = true
 	_update_texture()
 
+# Vira outra forma (minério de 2º nível), ainda sem refinar
+func evolve(new_shape):
+	shape = new_shape
+	refined = false
+	_update_texture()
+
 func _update_texture():
 	var nome = NAMES[shape]
 	if refined:
