@@ -1,6 +1,7 @@
 # Alterações que fiz
 
 **CADA MINÉRIO TEM VALOR DIFERENTE CRU ( é importante para próxima mecânica)**
+
 Círculo: Cru $1 →→ Refinado $3
 
 Triângulo: Cru $2 →→ Refinado $6
